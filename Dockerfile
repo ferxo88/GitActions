@@ -1,9 +1,11 @@
-FROM komljen/apache
+FROM node:14
 
-RUN \
-  apt-get update && \
-  apt-get -y install \
-          libapache2-mod-php5 \
-          php5-mysql \
-          mysql-client-5.5 && \
-  rm -rf /var/lib/apt/lists/*
+WORKDIR /usr/src/app
+
+COPY package.json .
+RUN npm install 
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
