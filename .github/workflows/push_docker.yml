@@ -22,10 +22,10 @@ jobs:
       run: |
         curl --user ${{ secrets.PRISMA_ACCESS_KEY }}:${{ secrets.PRISMA_SECRET_KEY }} --output ./twistcli${{ secrets.PRISMA_COMPUTE_URL }}/api/v1/util/twistcli 
         chmod a+x ./twistcli 
-    
+     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
-      with:
+      with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: sa-east-1
