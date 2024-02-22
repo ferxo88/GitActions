@@ -34,11 +34,12 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: github_actions
         IMAGE_TAG: nodejs_demo_image
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     #Prisma Cloud Code Repo Scan
     - name: Twistcli download   
       run: curl -s -k -u ${{ secrets.PRISMA_ACCESS_KEY }}:${{ secrets.PRISMA_SECRET_KEY }}${{ secrets.PRISMA_COMPUTE_URL }}/api/v1/util/twistcli -v -o /tmp/twistcli;chmod +x /tmp/twistcli  
 
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
