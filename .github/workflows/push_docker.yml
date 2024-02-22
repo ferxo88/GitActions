@@ -20,11 +20,7 @@ jobs:
 
     - name: Download twistcli from the Prisma Cloud Compute Console
       run: |
-<<<<<<< HEAD
         curl --user ${{ secrets.PRISMA_ACCESS_KEY }}:${{ secrets.PRISMA_SECRET_KEY }} --output ./twistcli${{ secrets.PRISMA_COMPUTE_URL }}/api/v1/util/twistcli 
-=======
-        curl --user ${{ secrets.PRISMA_ACCESS_KEY }}:${{ secrets.PRISMA_SECRET_KEY }} --output ./twistcl${{ secrets.PRISMA_CONSOLE_URL }}/api/v1/util/twistcli 
->>>>>>> 164c43a (New Push 10)
         chmod a+x ./twistcli 
     
     - name: Configure AWS credentials
