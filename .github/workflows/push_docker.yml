@@ -38,7 +38,7 @@ jobs:
       env:
         IMAGE_TAG: nodejs_demo_image
       run: |
-        docker build -t $IMAGE_TAG.
+        docker build -t $IMAGE_TAG .
 
     - name: Scan the image
       run: ./twistcli images scan --address ${{ secrets.PRISMA_COMPUTE_URL }} --user ${{ secrets.PRISMA_ACCESS_KEY }} --password ${{ secrets.PRISMA_SECRET_KEY }} --details $IMAGE_TAG
