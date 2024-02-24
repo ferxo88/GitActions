@@ -45,5 +45,10 @@ jobs:
         IMAGE_TAG: nodejs_demo_image
       run: ./twistcli images scan --address ${{ secrets.PRISMA_COMPUTE_URL }} --user ${{ secrets.PRISMA_ACCESS_KEY }} --password ${{ secrets.PRISMA_SECRET_KEY }} --details $IMAGE_TAG
 
+    - name: Sandbox the image
+      env:
+        IMAGE_TAG: nodejs_demo_image
+      run: sudo /tmp/twistcli sandbox --address ${{ secrets.PRISMA_COMPUTE_URL }} -u ${{ secrets.PRISMA_ACCESS_KEY }} -p ${{ secrets.PRISMA_SECRET_KEY }} --analysis-duration 2m --details $IMAGE_TAG
+
 
 
