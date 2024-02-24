@@ -22,17 +22,6 @@ jobs:
       run: |
         curl --user ${{ secrets.PRISMA_ACCESS_KEY }}:${{ secrets.PRISMA_SECRET_KEY }} --output ./twistcli ${{ secrets.PRISMA_COMPUTE_URL }}/api/v1/util/twistcli 
         chmod a+x ./twistcli 
-     
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with: 
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: sa-east-1
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build image
       env:
@@ -50,10 +39,5 @@ jobs:
         IMAGE_TAG: nodejs_demo_image
       run: sudo -s ./twistcli sandbox --address ${{ secrets.PRISMA_COMPUTE_URL }} -u ${{ secrets.PRISMA_ACCESS_KEY }} -p ${{ secrets.PRISMA_SECRET_KEY }} --analysis-duration 2m ${{ env.IMAGE_TAG }}
 
-    - name: Push to ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: github_actions
-        IMAGE_TAG: nodejs_demo_image
-      run: docker push $IMAGE_TAG   
+ 
 
